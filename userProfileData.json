@@ -1,0 +1,89 @@
+{
+  "userProfileData": {
+    "personalInfo": {
+      "name": "Het Kikani",
+      "headline": "Pursuing B.E in CSE (Data Science) | Full Stack Web Developer | Aspiring Data Scientist | Exploring AI & ML",
+      "location": "Ahmedabad, Gujarat, India",
+      "profilePicture": "https://ui-avatars.com/api/?name=Het+Kikani&background=020205&color=00f0ff&size=256",
+      "socialLinks": {
+        "instagram": "https://www.instagram.com/hetkikani_804",
+        "twitter": "https://x.com/KikaniHet",
+        "linkedin": "https://www.linkedin.com/in/het-kikani-67817236b/",
+        "github": "https://github.com/Hetk8406"
+      }
+    },
+    "linkedin": {
+      "about": "Pursuing B.E in CSE (Data Science) | Full Stack Web Developer | Aspiring Data Scientist | Exploring AI & ML",
+      "experience": [
+        {
+          "role": "Summer Intern",
+          "company": "Aarogix",
+          "period": "May 2025 - Jun 2025",
+          "description": "Apprenticeship focused on Data Analysis and Data Entry."
+        }
+      ],
+      "education": [
+        {
+          "institution": "Gujarat Technological University (GTU)",
+          "degree": "B.E in Computer Science and Engineering (Data Science)",
+          "period": "Jul 2025 - Present"
+        },
+        {
+          "institution": "LJ University",
+          "degree": "Diploma in Computer Engineering",
+          "period": "Aug 2022 - May 2025",
+          "grade": "First Class with Distinction"
+        }
+      ],
+      "certifications": [
+        {
+          "name": "Machine Learning Specialization",
+          "issuer": "Stanford University / Coursera",
+          "date": "Nov 2024",
+          "link": "#"
+        },
+        {
+          "name": "Full Stack Open",
+          "issuer": "University of Helsinki",
+          "date": "Aug 2024",
+          "link": "#"
+        },
+        {
+          "name": "Advanced React Patterns",
+          "issuer": "Frontend Masters",
+          "date": "May 2024",
+          "link": "#"
+        }
+      ]
+    },
+    "github": {
+      "username": "Hetk8406",
+      "repositories": [
+        {
+          "name": "Indian Stock Predictor",
+          "role": "Creator",
+          "description": "Predicting Indian stock market prices using machine learning algortihms.",
+          "url": "https://github.com/Hetk8406/Indian-Stock-Predictor"
+        },
+        {
+          "name": "LAWYER.AI",
+          "role": "Core Contributor",
+          "description": "Organization housing the complete full-stack infrastructure for the LAWYER.AI legal assistance platform.",
+          "url": "https://github.com/lawyerai-system"
+        },
+        {
+          "name": "FoundIt!",
+          "role": "Core Contributor",
+          "description": "Dedicated GitHub organization for the Lost & Found System architecture and repositories.",
+          "url": "https://github.com/lostfound-system"
+        },
+        {
+          "name": "ConceptLens",
+          "role": "Core Contributor",
+          "description": "Organization for ConceptLens system repositories and exploration tools.",
+          "url": "https://github.com/conceptlens-system"
+        }
+      ]
+    }
+  }
+}
