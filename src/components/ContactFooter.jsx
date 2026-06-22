@@ -1,337 +1,260 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, MapPin, Instagram, Twitter } from 'lucide-react';
+import { Github, Linkedin, Mail, MapPin, Instagram, Twitter, Send } from 'lucide-react';
+import WordReveal from './WordReveal';
+import { useMagnetic } from '../hooks/useMagnetic';
 
 const ContactFooter = ({ userData }) => {
-    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const submitBtnRef = useMagnetic(0.12);
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
-    };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const { name, email, message } = formData;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    const { name, email, message } = formData;
 
-        // Fallback to my email if userData is missing
-        const recipient = userData?.personalInfo?.email || "hetkikani990@gmail.com";
-        const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
-        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+    const recipient = userData?.personalInfo?.email || "hetkikani990@gmail.com";
+    const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
 
-        window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+    setTimeout(() => {
+      window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+      setIsSubmitting(false);
+      setFormData({ name: '', email: '', message: '' });
+    }, 600);
+  };
 
-        setFormData({ name: '', email: '', message: '' });
-    };
+  const socialLinks = userData?.personalInfo?.socialLinks || {};
 
-    return (
-        <section id="contact" style={{
-            padding: '100px 20px',
-            position: 'relative',
-            background: 'var(--bg-base)',
-            borderTop: '1px solid var(--border-subtle)'
+  const colLeftVariants = {
+    hidden: { opacity: 0, y: 20, scale: 0.98 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
+    }
+  };
+
+  const colRightVariants = {
+    hidden: { opacity: 0, y: 20, scale: 0.98 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }
+    }
+  };
+
+  return (
+    <section id="contact" style={{ padding: '120px 0 60px', background: '#050505' }}>
+      <div className="container">
+        <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+          <span className="section-tag">Transmission</span>
+          <h2 className="font-heading" style={{ fontSize: 'clamp(32px, 5vw, 54px)', lineHeight: '1.1', marginBottom: '16px' }}>
+            <WordReveal text="Get in Touch" />
+          </h2>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '15px', maxWidth: '500px', margin: '0 auto' }}>
+            Initiate a connection or discuss engineering collaborations.
+          </p>
+        </div>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gap: '64px',
+          alignItems: 'start',
+          maxWidth: '1000px',
+          margin: '0 auto 80px'
         }}>
-
-
-            <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                style={{
-                    maxWidth: '1200px',
-                    margin: '0 auto',
-                    position: 'relative',
-                    zIndex: 10,
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 350px), 1fr))',
-                    gap: '60px',
-                    alignItems: 'start'
-                }}
-            >
-                {/* Left Column: Information & Stylized Map */}
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <h2 className="text-highlight" style={{ fontSize: 'clamp(40px, 8vw, 60px)', margin: '0 0 20px 0', fontWeight: '900', letterSpacing: '-2px' }}>
-                        04. Get In Touch
-                    </h2>
-
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '18px', lineHeight: '1.6', marginBottom: '40px', maxWidth: '500px' }}>
-                        Whether you have a question, a project proposal, or just want to say hi, my inbox is always open. I'll try my best to get back to you!
-                    </p>
-
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '50px' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                            <div style={{ padding: '10px', background: 'var(--bg-surface)', border: '1px solid var(--border-strong)' }}>
-                                <Mail size={24} color="var(--accent-primary)" />
-                            </div>
-                            <div>
-                                <h4 style={{ margin: '0 0 5px 0', color: 'var(--text-secondary)', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '1px' }}>Email</h4>
-                                <a href="mailto:hetkikani990@gmail.com" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: 'bold' }}>
-                                    hetkikani990@gmail.com
-                                </a>
-                            </div>
-                        </div>
-
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                            <div style={{ padding: '10px', background: 'var(--bg-surface)', border: '1px solid var(--border-strong)' }}>
-                                <MapPin size={24} color="var(--accent-primary)" />
-                            </div>
-                            <div>
-                                <h4 style={{ margin: '0 0 5px 0', color: 'var(--text-secondary)', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '1px' }}>Location</h4>
-                                <span style={{ color: 'var(--text-primary)', fontWeight: 'bold' }}>
-                                    {userData?.personalInfo?.location || "India"}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style={{ marginBottom: '50px' }}>
-                        <h4 style={{ margin: '0 0 15px 0', color: 'var(--text-secondary)', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '1px' }}>Social Profiles</h4>
-                        <div style={{ display: 'flex', gap: '15px' }}>
-                            {userData?.personalInfo?.socialLinks?.twitter && (
-                                <motion.a
-                                    href={userData.personalInfo.socialLinks.twitter}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    whileHover={{ y: -5, color: 'var(--accent-primary)', borderColor: 'var(--accent-primary)' }}
-                                    style={{
-                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                        width: '45px', height: '45px',
-                                        background: 'var(--bg-surface)', border: '1px solid var(--border-strong)',
-                                        color: 'var(--text-primary)', transition: 'all 0.3s'
-                                    }}
-                                    aria-label="Twitter/X"
-                                >
-                                    <Twitter size={20} />
-                                </motion.a>
-                            )}
-                            {userData?.personalInfo?.socialLinks?.instagram && (
-                                <motion.a
-                                    href={userData.personalInfo.socialLinks.instagram}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    whileHover={{ y: -5, color: 'var(--accent-primary)', borderColor: 'var(--accent-primary)' }}
-                                    style={{
-                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                        width: '45px', height: '45px',
-                                        background: 'var(--bg-surface)', border: '1px solid var(--border-strong)',
-                                        color: 'var(--text-primary)', transition: 'all 0.3s'
-                                    }}
-                                    aria-label="Instagram"
-                                >
-                                    <Instagram size={20} />
-                                </motion.a>
-                            )}
-                            {userData?.personalInfo?.socialLinks?.linkedin && (
-                                <motion.a
-                                    href={userData.personalInfo.socialLinks.linkedin}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    whileHover={{ y: -5, color: 'var(--accent-primary)', borderColor: 'var(--accent-primary)' }}
-                                    style={{
-                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                        width: '45px', height: '45px',
-                                        background: 'var(--bg-surface)', border: '1px solid var(--border-strong)',
-                                        color: 'var(--text-primary)', transition: 'all 0.3s'
-                                    }}
-                                    aria-label="LinkedIn"
-                                >
-                                    <Linkedin size={20} />
-                                </motion.a>
-                            )}
-                            {userData?.personalInfo?.socialLinks?.github && (
-                                <motion.a
-                                    href={userData.personalInfo.socialLinks.github}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    whileHover={{ y: -5, color: 'var(--accent-primary)', borderColor: 'var(--accent-primary)' }}
-                                    style={{
-                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                        width: '45px', height: '45px',
-                                        background: 'var(--bg-surface)', border: '1px solid var(--border-strong)',
-                                        color: 'var(--text-primary)', transition: 'all 0.3s'
-                                    }}
-                                    aria-label="GitHub"
-                                >
-                                    <Github size={20} />
-                                </motion.a>
-                            )}
-                        </div>
-                    </div>
-
-                    {/* Stylized Map Representation */}
-                    <div style={{
-                        width: '100%',
-                        height: '250px',
-                        background: 'var(--bg-surface)',
-                        border: '1px solid var(--border-strong)',
-                        position: 'relative',
-                        overflow: 'hidden',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                    }}>
-                        <div style={{
-                            position: 'absolute',
-                            inset: 0,
-                            backgroundImage: 'radial-gradient(var(--border-strong) 1px, transparent 1px)',
-                            backgroundSize: '20px 20px',
-                            opacity: 0.5
-                        }} />
-                        <div style={{
-                            width: '20px',
-                            height: '20px',
-                            background: 'var(--accent-primary)',
-                            borderRadius: '50%',
-                            boxShadow: '0 0 0 10px rgba(37, 99, 235, 0.2)',
-                            zIndex: 2
-                        }} />
-                    </div>
+          {/* Details Column */}
+          <motion.div
+            variants={colLeftVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-10%" }}
+            style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}
+          >
+            <div className="surface-card" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center', zIndex: 2 }}>
+                <Mail size={18} color="var(--text-secondary)" />
+                <div>
+                  <div className="font-mono" style={{ fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>EMAIL</div>
+                  <a href={`mailto:${userData?.personalInfo?.email || "hetkikani990@gmail.com"}`} style={{ fontSize: '14px', color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '500' }}>
+                    {userData?.personalInfo?.email || "hetkikani990@gmail.com"}
+                  </a>
                 </div>
+              </div>
 
-                {/* Right Column: Contact Form */}
-                <div style={{
-                    background: 'var(--bg-surface)',
-                    padding: '40px',
-                    border: '1px solid var(--border-strong)',
-                    boxShadow: '0 10px 30px rgba(0,0,0,0.02)'
-                }}>
-                    <h3 style={{ margin: '0 0 30px 0', fontSize: '24px', fontWeight: '800' }}>Send a Message</h3>
-
-                    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                            <label style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>Your Name</label>
-                            <input
-                                type="text"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                required
-                                placeholder="John Doe"
-                                style={{
-                                    padding: '15px',
-                                    background: 'var(--bg-base)',
-                                    border: '1px solid var(--border-subtle)',
-                                    color: 'var(--text-primary)',
-                                    outline: 'none',
-                                    fontSize: '16px',
-                                    transition: 'border-color 0.3s'
-                                }}
-                                onFocus={(e) => e.target.style.borderColor = 'var(--accent-primary)'}
-                                onBlur={(e) => e.target.style.borderColor = 'var(--border-subtle)'}
-                            />
-                        </div>
-
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                            <label style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>Your Email</label>
-                            <input
-                                type="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                                placeholder="john@example.com"
-                                style={{
-                                    padding: '15px',
-                                    background: 'var(--bg-base)',
-                                    border: '1px solid var(--border-subtle)',
-                                    color: 'var(--text-primary)',
-                                    outline: 'none',
-                                    fontSize: '16px',
-                                    transition: 'border-color 0.3s'
-                                }}
-                                onFocus={(e) => e.target.style.borderColor = 'var(--accent-primary)'}
-                                onBlur={(e) => e.target.style.borderColor = 'var(--border-subtle)'}
-                            />
-                        </div>
-
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                            <label style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>Message</label>
-                            <textarea
-                                rows="5"
-                                name="message"
-                                value={formData.message}
-                                onChange={handleChange}
-                                required
-                                placeholder="Hello! I'd like to discuss..."
-                                style={{
-                                    padding: '15px',
-                                    background: 'var(--bg-base)',
-                                    border: '1px solid var(--border-subtle)',
-                                    color: 'var(--text-primary)',
-                                    outline: 'none',
-                                    fontSize: '16px',
-                                    resize: 'vertical',
-                                    transition: 'border-color 0.3s'
-                                }}
-                                onFocus={(e) => e.target.style.borderColor = 'var(--accent-primary)'}
-                                onBlur={(e) => e.target.style.borderColor = 'var(--border-subtle)'}
-                            />
-                        </div>
-
-                        <motion.button
-                            whileHover={{ y: -2, boxShadow: '0 4px 14px 0 rgba(37, 99, 235, 0.39)' }}
-                            whileTap={{ scale: 0.98 }}
-                            type="submit"
-                            style={{
-                                marginTop: '10px',
-                                padding: '16px',
-                                background: 'var(--accent-primary)',
-                                border: 'none',
-                                color: '#ffffff',
-                                fontWeight: 'bold',
-                                letterSpacing: '1px',
-                                textTransform: 'uppercase',
-                                fontSize: '14px',
-                                cursor: 'pointer',
-                                transition: 'background 0.3s'
-                            }}
-                        >
-                            Transmit Message
-                        </motion.button>
-                    </form>
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center', zIndex: 2 }}>
+                <MapPin size={18} color="var(--text-secondary)" />
+                <div>
+                  <div className="font-mono" style={{ fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>LOCATION</div>
+                  <div style={{ fontSize: '14px', color: 'var(--text-primary)', fontWeight: '500' }}>
+                    {userData?.personalInfo?.location || "Ahmedabad, Gujarat, India"}
+                  </div>
                 </div>
-            </motion.div>
-
-            {/* Sub Footer Bar */}
-            <div className="sub-footer" style={{
-                maxWidth: '1200px',
-                margin: '80px auto 0',
-                paddingTop: '30px',
-                borderTop: '1px solid var(--border-subtle)',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                flexWrap: 'wrap',
-                gap: '20px'
-            }}>
-                <p style={{ margin: 0, fontSize: '12px', color: 'var(--text-secondary)', letterSpacing: '1px', fontWeight: 'bold' }}>
-                    &copy; {new Date().getFullYear()} {userData?.personalInfo?.name?.toUpperCase() || "HET KIKANI"}. ALL RIGHTS RESERVED.
-                </p>
-
-                <div style={{ display: 'flex', gap: '20px' }}>
-                    <motion.a
-                        href="https://github.com/Hetk8406"
-                        target="_blank"
-                        rel="noreferrer"
-                        whileHover={{ y: -3, color: 'var(--accent-primary)' }}
-                        style={{ color: 'var(--text-secondary)', transition: 'color 0.2s' }}
-                    >
-                        <Github size={20} />
-                    </motion.a>
-                    <motion.a
-                        href="https://www.linkedin.com/in/het-kikani-67817236b/"
-                        target="_blank"
-                        rel="noreferrer"
-                        whileHover={{ y: -3, color: 'var(--accent-primary)' }}
-                        style={{ color: 'var(--text-secondary)', transition: 'color 0.2s' }}
-                    >
-                        <Linkedin size={20} />
-                    </motion.a>
-                </div>
+              </div>
             </div>
-        </section>
-    );
+
+            <div>
+              <h4 className="font-mono" style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '16px' }}>
+                DIGITAL FOOTPRINT
+              </h4>
+              <div style={{ display: 'flex', gap: '12px' }}>
+                {Object.entries(socialLinks).map(([platform, url]) => (
+                  <SocialIcon key={platform} platform={platform} url={url} />
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Form Column */}
+          <motion.div
+            variants={colRightVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-10%" }}
+            className="surface-card"
+          >
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px', zIndex: 2, position: 'relative' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <label className="font-mono" style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Full Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  placeholder="Your Name"
+                  className="minimal-input"
+                />
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <label className="font-mono" style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Email Address</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  placeholder="your@email.com"
+                  className="minimal-input"
+                />
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <label className="font-mono" style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Message</label>
+                <textarea
+                  name="message"
+                  rows="4"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  placeholder="Inquiry or message details..."
+                  className="minimal-input"
+                  style={{ resize: 'none' }}
+                />
+              </div>
+
+              <div style={{ display: 'flex' }}>
+                <button
+                  ref={submitBtnRef}
+                  type="submit"
+                  disabled={isSubmitting}
+                  style={{
+                    flex: 1,
+                    display: 'inline-block',
+                    padding: '14px',
+                    borderRadius: '8px',
+                    border: '1px solid var(--text-primary)',
+                    background: 'var(--text-primary)',
+                    color: '#050505',
+                    fontWeight: '600',
+                    fontSize: '13px',
+                    textTransform: 'uppercase',
+                    letterSpacing: '1px',
+                    cursor: 'pointer',
+                    transition: 'background 0.3s ease, color 0.3s ease, border-color 0.3s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.background = 'transparent';
+                    e.target.style.color = 'var(--text-primary)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.background = 'var(--text-primary)';
+                    e.target.style.color = '#050505';
+                  }}
+                >
+                  <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                    {isSubmitting ? "Transmitting..." : "Send Transmission"} <Send size={14} />
+                  </span>
+                </button>
+              </div>
+            </form>
+          </motion.div>
+        </div>
+
+        <div style={{
+          marginTop: '60px',
+          paddingTop: '32px',
+          borderTop: '1px solid var(--border-subtle)',
+          textAlign: 'center'
+        }}>
+          <p className="font-mono" style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+            &copy; {new Date().getFullYear()} {userData?.personalInfo?.name || "Het Kikani"}. All loops closed.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const SocialIcon = ({ platform, url }) => {
+  const icons = {
+    github: <Github size={16} />,
+    linkedin: <Linkedin size={16} />,
+    instagram: <Instagram size={16} />,
+    twitter: <Twitter size={16} />
+  };
+
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noreferrer"
+      style={{
+        width: '40px',
+        height: '40px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: '8px',
+        border: '1px solid var(--border-subtle)',
+        background: 'rgba(255, 255, 255, 0.02)',
+        color: 'var(--text-secondary)',
+        transition: 'all 0.2s ease',
+        zIndex: 2
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.borderColor = 'var(--text-primary)';
+        e.currentTarget.style.color = 'var(--text-primary)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.borderColor = 'var(--border-subtle)';
+        e.currentTarget.style.color = 'var(--text-secondary)';
+      }}
+    >
+      {icons[platform.toLowerCase()] || <Mail size={16} />}
+    </a>
+  );
 };
 
 export default ContactFooter;

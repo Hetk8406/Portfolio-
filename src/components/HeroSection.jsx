@@ -1,156 +1,234 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Terminal, Database, Code } from 'lucide-react';
+import { motion, useScroll, useTransform, useMotionValue } from 'framer-motion';
+import { ArrowDown } from 'lucide-react';
+import WordReveal from './WordReveal';
+import { useMagnetic } from '../hooks/useMagnetic';
 
-const HeroSection = ({ userData }) => {
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.2,
-                delayChildren: 0.3
-            }
-        }
-    };
+const HeroSection = () => {
+  const workBtnRef = useMagnetic(0.15);
+  const bookBtnRef = useMagnetic(0.15);
 
-    const itemVariants = {
-        hidden: { opacity: 0, y: 30 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
-    };
+  // Parallax Scroll values
+  const { scrollY } = useScroll();
+  const yText = useTransform(scrollY, [0, 600], [0, -35]);
+  const yBg = useTransform(scrollY, [0, 600], [0, 45]);
+  const opacityLines = useTransform(scrollY, [0, 600], [1, 0.3]);
 
-    return (
-        <section id="home" style={{
-            minHeight: '100vh',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '100px 20px 0',
-            position: 'relative',
-            overflow: 'hidden'
+  // Mouse Parallax values
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const handleMouseMove = (e) => {
+    const { innerWidth, innerHeight } = window;
+    const xPct = (e.clientX / innerWidth) - 0.5;
+    const yPct = (e.clientY / innerHeight) - 0.5;
+    mouseX.set(xPct);
+    mouseY.set(yPct);
+  };
+
+  const textParallaxX = useTransform(mouseX, [-0.5, 0.5], [-8, 8]);
+  const textParallaxY = useTransform(mouseY, [-0.5, 0.5], [-8, 8]);
+  const bgParallaxX = useTransform(mouseX, [-0.5, 0.5], [10, -10]);
+  const bgParallaxY = useTransform(mouseY, [-0.5, 0.5], [10, -10]);
+
+  // Combine Scroll and Mouse Parallax offsets into single motion values
+  const combinedYBg = useTransform([yBg, bgParallaxY], ([latestYBg, latestBgParallaxY]) => latestYBg + latestBgParallaxY);
+  const combinedYText = useTransform([yText, textParallaxY], ([latestYText, latestTextParallaxY]) => latestYText + latestTextParallaxY);
+
+  return (
+    <div
+      onMouseMove={handleMouseMove}
+      style={{
+        position: 'relative',
+        width: '100%',
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        padding: '20px',
+        background: '#050505',
+        overflow: 'hidden'
+      }}
+    >
+      {/* Subtle Background Elements with Parallax (Scroll + Mouse) */}
+      <motion.div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          x: bgParallaxX,
+          y: combinedYBg,
+          opacity: opacityLines,
+          pointerEvents: 'none'
+        }}
+      >
+        <div className="subtle-line-hero" />
+        <div className="subtle-line-hero-right" />
+      </motion.div>
+      
+      {/* Very soft center radial glow */}
+      <div style={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '600px',
+        height: '600px',
+        background: 'radial-gradient(circle, rgba(255,255,255,0.015) 0%, transparent 70%)',
+        pointerEvents: 'none',
+        zIndex: 0
+      }} />
+
+      {/* Layered Text Content */}
+      <motion.div
+        style={{
+          position: 'relative',
+          zIndex: 1,
+          x: textParallaxX,
+          y: combinedYText
+        }}
+      >
+        <motion.span
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="font-mono"
+          style={{
+            color: 'var(--text-muted)',
+            letterSpacing: '0.3em',
+            fontSize: '11px',
+            textTransform: 'uppercase',
+            fontWeight: '500',
+            marginBottom: '24px',
+            display: 'block'
+          }}
+        >
+          Het Kikani
+        </motion.span>
+
+        <h1 className="font-heading" style={{
+          fontSize: 'clamp(44px, 8vw, 92px)',
+          fontWeight: '800',
+          lineHeight: '1.05',
+          letterSpacing: '-0.03em',
+          margin: '0 0 16px 0',
+          color: 'var(--text-primary)',
+          maxWidth: '900px'
         }}>
-            {/* Main Content */}
-            <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-                style={{
-                    maxWidth: '1200px',
-                    width: '100%',
-                    zIndex: 10,
-                    position: 'relative',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    flexWrap: 'wrap-reverse',
-                    gap: '50px'
-                }}
-            >
-                {/* Text Section (Left) */}
-                <div className="hero-text-content" style={{ flex: '1 1 min(100%, 500px)', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                    <motion.div variants={itemVariants} style={{ marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                        <Terminal size={20} color="var(--accent-primary)" />
-                        <span style={{ color: 'var(--accent-primary)', letterSpacing: '2px', fontSize: '14px', textTransform: 'uppercase', fontWeight: 'bold' }}>
-                            Welcome to my digital workspace
-                        </span>
-                    </motion.div>
+          <WordReveal text="I build systems. I explore ideas." />
+        </h1>
 
-                    <motion.h1 variants={itemVariants} style={{ fontSize: 'clamp(38px, 8vw, 90px)', margin: '0 0 10px 0', lineHeight: '1', fontWeight: '900', letterSpacing: '-2px' }}>
-                        {userData?.personalInfo?.name || "Initializing..."}
-                    </motion.h1>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          style={{
+            fontSize: 'clamp(16px, 1.8vw, 20px)',
+            color: 'var(--text-secondary)',
+            maxWidth: '500px',
+            margin: '0 auto 40px',
+            fontWeight: '400',
+            lineHeight: '1.6'
+          }}
+        >
+          Developer & Author
+        </motion.p>
 
-                    <motion.h2 variants={itemVariants} className="text-highlight" style={{ fontSize: 'clamp(18px, 4vw, 32px)', margin: '0 0 30px 0', fontWeight: '600' }}>
-                        {userData?.personalInfo?.headline || "Software Engineer"}
-                    </motion.h2>
+        {/* Dual Magnetic CTAs */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          style={{
+            display: 'flex',
+            gap: '16px',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexWrap: 'wrap'
+          }}
+        >
+          <a
+            ref={workBtnRef}
+            href="#work"
+            style={{
+              display: 'inline-block',
+              padding: '14px 28px',
+              borderRadius: '8px',
+              background: 'var(--text-primary)',
+              color: '#050505',
+              textDecoration: 'none',
+              fontSize: '13px',
+              fontWeight: '600',
+              textTransform: 'uppercase',
+              letterSpacing: '1px',
+              border: '1px solid var(--text-primary)',
+              transition: 'background 0.3s ease, color 0.3s ease, border-color 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.background = 'transparent';
+              e.target.style.color = 'var(--text-primary)';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = 'var(--text-primary)';
+              e.target.style.color = '#050505';
+            }}
+          >
+            Explore Work
+          </a>
+          <a
+            ref={bookBtnRef}
+            href="#ananta"
+            style={{
+              display: 'inline-block',
+              padding: '14px 28px',
+              borderRadius: '8px',
+              background: 'transparent',
+              color: 'var(--text-primary)',
+              textDecoration: 'none',
+              fontSize: '13px',
+              fontWeight: '600',
+              textTransform: 'uppercase',
+              letterSpacing: '1px',
+              border: '1px solid var(--border-subtle)',
+              transition: 'border-color 0.3s ease, background-color 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.borderColor = 'var(--text-primary)';
+              e.target.style.backgroundColor = 'rgba(255,255,255,0.02)';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.borderColor = 'var(--border-subtle)';
+              e.target.style.backgroundColor = 'transparent';
+            }}
+          >
+            Explore Ananta
+          </a>
+        </motion.div>
+      </motion.div>
 
-                    <motion.p variants={itemVariants} style={{ color: 'var(--text-secondary)', fontSize: '18px', lineHeight: '1.6', maxWidth: '600px', marginBottom: '50px' }}>
-                        Deploying cutting-edge digital experiences. Specializing in high-performance web applications, 2D animations, and robust system architectures.
-                    </motion.p>
-
-                    <motion.div className="hero-buttons" variants={itemVariants} style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
-                        <motion.a
-                            href="#projects"
-                            whileHover={{ y: -2 }}
-                            whileTap={{ scale: 0.98 }}
-                            style={{
-                                padding: '16px 32px',
-                                background: 'var(--accent-primary)',
-                                border: '1px solid var(--accent-primary)',
-                                color: '#ffffff',
-                                borderRadius: '0px',
-                                textDecoration: 'none',
-                                fontWeight: 'bold',
-                                letterSpacing: '1px',
-                                textTransform: 'uppercase',
-                                fontSize: '14px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '10px',
-                                boxShadow: '0 4px 14px 0 rgba(37, 99, 235, 0.39)'
-                            }}
-                        >
-                            <Code size={18} /> View Repositories
-                        </motion.a>
-
-                        <motion.a
-                            href="#contact"
-                            whileHover={{ y: -2, background: 'var(--bg-base)' }}
-                            whileTap={{ scale: 0.98 }}
-                            style={{
-                                padding: '16px 32px',
-                                background: 'transparent',
-                                border: '1px solid var(--border-strong)',
-                                color: 'var(--text-primary)',
-                                borderRadius: '0px',
-                                textDecoration: 'none',
-                                fontWeight: 'bold',
-                                letterSpacing: '1px',
-                                textTransform: 'uppercase',
-                                fontSize: '14px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '10px'
-                            }}
-                        >
-                            <Database size={18} /> Establish Link
-                        </motion.a>
-                    </motion.div>
-                </div>
-
-                {/* Profile Image Section (Right) */}
-                {userData?.personalInfo?.profilePicture && (
-                    <motion.div
-                        variants={itemVariants}
-                        style={{
-                            flex: '0 0 auto',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center'
-                        }}
-                    >
-                        <img
-                            src={userData.personalInfo.profilePicture}
-                            alt={userData.personalInfo.name}
-                            onError={(e) => {
-                                // Fallback if regular URL fails or is blocked by adblockers
-                                e.target.onError = null;
-                                e.target.src = 'https://api.dicebear.com/9.x/initials/svg?seed=HK&backgroundColor=2563eb&textColor=ffffff';
-                            }}
-                            style={{
-                                width: 'min(350px, 80vw)',
-                                height: 'min(350px, 80vw)',
-                                objectFit: 'cover',
-                                border: '1px solid var(--border-strong)',
-                                boxShadow: '0 10px 40px rgba(0, 0, 0, 0.08)',
-                                borderRadius: '12px'
-                            }}
-                        />
-                    </motion.div>
-                )}
-            </motion.div>
-        </section>
-    );
+      {/* Scroll Down Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.1, duration: 1 }}
+        style={{
+          position: 'absolute',
+          bottom: '40px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '8px',
+          color: 'var(--text-muted)'
+        }}
+      >
+        <span className="font-mono" style={{ fontSize: '9px', textTransform: 'uppercase', letterSpacing: '2px' }}>
+          Scroll
+        </span>
+        <ArrowDown size={14} />
+      </motion.div>
+    </div>
+  );
 };
 
 export default HeroSection;

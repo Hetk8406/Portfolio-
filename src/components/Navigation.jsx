@@ -1,83 +1,139 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 
 const Navigation = () => {
-    const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
-        };
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+  const navLinks = [
+    { name: 'Home', href: '#home' },
+    { name: 'Work', href: '#work' },
+    { name: 'Ananta', href: '#ananta' },
+    { name: 'Concepts', href: '#concept' },
+    { name: 'About', href: '#about' },
+    { name: 'Contact', href: '#contact' }
+  ];
 
-    const navLinks = [
-        { name: 'HOME', href: '#home' },
-        { name: 'ACADEMICS', href: '#academics' },
-        { name: 'PROJECTS', href: '#projects' },
-        { name: 'CERTIFICATIONS', href: '#certifications' },
-        { name: 'CONTACT', href: '#contact' },
-    ];
+  return (
+    <motion.nav
+      initial={{ y: -10, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 100,
+        padding: scrolled ? '16px 40px' : '28px 40px',
+        transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+        background: scrolled ? 'rgba(5, 5, 5, 0.9)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(10px)' : 'none',
+        borderBottom: scrolled ? '1px solid var(--border-subtle)' : '1px solid transparent'
+      }}
+    >
+      <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <a href="#home" style={{ textDecoration: 'none', color: 'var(--text-primary)', fontSize: '18px', fontWeight: '800', letterSpacing: '-0.02em', fontFamily: 'Syne' }}>
+          HET<span style={{ color: 'var(--text-secondary)', opacity: 0.4 }}>.</span>K
+        </a>
 
-    return (
-        <motion.nav
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-            style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                right: 0,
-                zIndex: 50,
-                padding: '20px 0',
-                transition: 'all 0.3s ease',
-                background: scrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent',
-                backdropFilter: scrolled ? 'blur(10px)' : 'none',
-                borderBottom: scrolled ? '1px solid var(--border-subtle)' : '1px solid transparent'
-            }}
+        {/* Desktop Links */}
+        <div style={{ display: 'flex', gap: '32px' }} className="nav-links-desktop">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              style={{
+                color: 'var(--text-secondary)',
+                textDecoration: 'none',
+                fontSize: '11px',
+                fontFamily: 'JetBrains Mono, monospace',
+                fontWeight: '500',
+                textTransform: 'uppercase',
+                letterSpacing: '1px',
+                transition: 'color 0.2s ease',
+              }}
+              onMouseEnter={(e) => e.target.style.color = 'var(--text-primary)'}
+              onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}
+            >
+              {link.name}
+            </a>
+          ))}
+        </div>
+
+        {/* Mobile Toggle */}
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          style={{ background: 'none', border: 'none', color: 'var(--text-primary)', cursor: 'pointer' }}
+          className="mobile-toggle"
         >
-            <div className="nav-container" style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 20px' }}>
-                <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    style={{ fontWeight: 'bold', fontSize: '24px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
-                >
-                    <span style={{ color: 'var(--text-primary)', letterSpacing: '1px' }}>HET<span style={{ color: 'var(--accent-primary)', fontWeight: '900' }}>KIKANI</span></span>
-                </motion.div>
+          {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </div>
 
-                <ul className="nav-links" style={{ display: 'flex', gap: '30px', listStyle: 'none', margin: 0, padding: 0 }}>
-                    {navLinks.map((link, i) => (
-                        <motion.li
-                            key={link.name}
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: i * 0.1 + 0.5 }}
-                        >
-                            <motion.a
-                                className="nav-link-item"
-                                href={link.href}
-                                whileHover={{ color: 'var(--accent-primary)' }}
-                                style={{
-                                    color: 'var(--text-secondary)',
-                                    textDecoration: 'none',
-                                    fontSize: '14px',
-                                    letterSpacing: '1px',
-                                    textTransform: 'uppercase',
-                                    fontWeight: '500',
-                                    transition: 'color 0.2s ease'
-                                }}
-                            >
-                                {link.name}
-                            </motion.a>
-                        </motion.li>
-                    ))}
-                </ul>
-            </div>
-        </motion.nav>
-    );
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            style={{
+              position: 'fixed',
+              top: '70px',
+              left: 0,
+              right: 0,
+              background: '#0E0E11',
+              borderBottom: '1px solid var(--border-subtle)',
+              zIndex: 99,
+              display: 'flex',
+              flexDirection: 'column',
+              padding: '24px 40px',
+              gap: '20px'
+            }}
+          >
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                style={{
+                  color: 'var(--text-secondary)',
+                  textDecoration: 'none',
+                  fontSize: '14px',
+                  fontFamily: 'JetBrains Mono, monospace',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px',
+                  padding: '8px 0'
+                }}
+              >
+                {link.name}
+              </a>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .nav-links-desktop { display: none !important; }
+          .mobile-toggle { display: block !important; }
+        }
+        @media (min-width: 769px) {
+          .nav-links-desktop { display: flex !important; }
+          .mobile-toggle { display: none !important; }
+        }
+      `}</style>
+    </motion.nav>
+  );
 };
 
 export default Navigation;
