@@ -161,13 +161,20 @@ const ProjectCard = ({ project, details }) => {
   };
 
   return (
-    <motion.div
+    <motion.a
+      href={details.link}
+      target="_blank"
+      rel="noreferrer"
       variants={cardVariants}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
         perspective: '1000px',
-        transformStyle: 'preserve-3d'
+        transformStyle: 'preserve-3d',
+        textDecoration: 'none',
+        color: 'inherit',
+        display: 'block',
+        cursor: 'pointer'
       }}
     >
       <motion.div
@@ -208,16 +215,11 @@ const ProjectCard = ({ project, details }) => {
           </span>
           <div style={{ display: 'flex', gap: '12px' }}>
             {details.link && (
-              <a
-                href={details.link}
-                target="_blank"
-                rel="noreferrer"
+              <span
                 style={{ color: 'var(--text-secondary)', transition: 'color 0.2s' }}
-                onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
-                onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
               >
                 <Github size={18} />
-              </a>
+              </span>
             )}
           </div>
         </div>
@@ -252,7 +254,7 @@ const ProjectCard = ({ project, details }) => {
           ))}
         </div>
       </motion.div>
-    </motion.div>
+    </motion.a>
   );
 };
 

@@ -1,16 +1,18 @@
+"use client";
+
 import React, { useEffect } from 'react';
 import Lenis from 'lenis';
-import Navigation from './components/Navigation';
-import HeroSection from './components/HeroSection';
-import DualIdentity from './components/DualIdentity';
-import ProjectsGallery from './components/ProjectsGallery';
-import AnantaShowcase from './components/AnantaShowcase';
-import ConceptPhilosophy from './components/ConceptPhilosophy';
-import AboutSection from './components/AboutSection';
-import ContactFooter from './components/ContactFooter';
-import userData from '../userProfileData.json';
+import Navigation from '../components/Navigation';
+import HeroSection from '../components/HeroSection';
+import DualIdentity from '../components/DualIdentity';
+import ProjectsGallery from '../components/ProjectsGallery';
+import AnantaShowcase from '../components/AnantaShowcase';
+import ConceptPhilosophy from '../components/ConceptPhilosophy';
+import AboutSection from '../components/AboutSection';
+import ContactFooter from '../components/ContactFooter';
+import userData from '../../userProfileData.json';
 
-function App() {
+export default function Home() {
   const profileData = userData?.userProfileData;
 
   useEffect(() => {
@@ -68,7 +70,6 @@ function KeepInteractionWarm() {
       const cards = document.querySelectorAll('.surface-card');
       cards.forEach((card) => {
         const rect = card.getBoundingClientRect();
-        // Only calculate coordinates if mouse is actually inside the card bounding box
         if (
           e.clientX >= rect.left &&
           e.clientX <= rect.right &&
@@ -89,5 +90,3 @@ function KeepInteractionWarm() {
 
   return null;
 }
-
-export default App;
