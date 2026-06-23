@@ -195,9 +195,9 @@ const AboutSection = ({ userData, limit }) => {
         name: lang,
         category: "Languages",
         icon: (
-          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="#00f0ff" stroke-width="1.5">
-            <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M12 4l-4 16" stroke-linecap="round" stroke-linejoin="round" />
+          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="#00f0ff" strokeWidth="1.5">
+            <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M12 4l-4 16" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         )
       });
