@@ -185,7 +185,7 @@ const DualIdentity = () => {
             </div>
 
             <a
-              href="#ananta"
+              href="#books"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',

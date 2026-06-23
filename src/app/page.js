@@ -8,7 +8,7 @@ import DualIdentity from '../components/DualIdentity';
 import ProjectsGallery from '../components/ProjectsGallery';
 import AnantaShowcase from '../components/AnantaShowcase';
 import ConceptPhilosophy from '../components/ConceptPhilosophy';
-import AboutSection from '../components/AboutSection';
+import AboutHero from '../components/AboutHero';
 import ContactFooter from '../components/ContactFooter';
 import userData from '../../userProfileData.json';
 
@@ -46,7 +46,7 @@ export default function Home() {
       
       <HeroSection />
       
-      <AboutSection userData={profileData} limit={true} />
+      <AboutHero userData={profileData} isSummary={true} />
       
       <DualIdentity />
       

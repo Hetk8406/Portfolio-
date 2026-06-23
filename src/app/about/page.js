@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import Lenis from 'lenis';
 import Navigation from '../../components/Navigation';
+import AboutHero from '../../components/AboutHero';
 import AboutSection from '../../components/AboutSection';
 import ContactFooter from '../../components/ContactFooter';
 import userData from '../../../userProfileData.json';
@@ -41,6 +42,8 @@ export default function AboutPage() {
 
       {/* Spacer to push content below fixed navigation */}
       <div style={{ height: '100px' }} />
+
+      <AboutHero userData={profileData} />
 
       <AboutSection userData={profileData} />
 

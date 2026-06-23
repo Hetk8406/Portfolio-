@@ -57,12 +57,12 @@ const AnantaShowcase = ({ limit }) => {
   };
 
   return (
-    <section id="ananta" style={{ padding: '120px 0', borderBottom: '1px solid var(--border-subtle)', background: '#050505' }}>
+    <section id="books" style={{ padding: '120px 0', borderBottom: '1px solid var(--border-subtle)', background: '#050505' }}>
       <div className="container">
         <div style={{ textAlign: 'center', marginBottom: '80px' }}>
           <span className="section-tag">Sci-Fi Duology</span>
           <h2 className="font-heading" style={{ fontSize: 'clamp(32px, 5vw, 54px)', lineHeight: '1.1', marginBottom: '16px' }}>
-            <WordReveal text="Ananta" />
+            <WordReveal text="Books" />
           </h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '16px', maxWidth: '600px', margin: '0 auto', fontWeight: '400' }}>
             A story about loops, memory, and reality. Mapping existential queries onto technological allegories.
@@ -220,7 +220,7 @@ const AnantaShowcase = ({ limit }) => {
         {limit && books.length > limit && (
           <div style={{ textAlign: 'center', marginTop: '56px' }}>
             <Link
-              href="/ananta"
+              href="/books"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -257,6 +257,7 @@ const AnantaShowcase = ({ limit }) => {
       <AnimatePresence>
         {activeBook && (
           <motion.div
+            data-lenis-prevent
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

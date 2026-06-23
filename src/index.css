@@ -212,7 +212,7 @@ html.lenis body {
     display: none;
   }
   #work .container > div:last-child,
-  #ananta .container > div:last-child {
+  #books .container > div:last-child {
     grid-template-columns: 1fr !important;
   }
 }

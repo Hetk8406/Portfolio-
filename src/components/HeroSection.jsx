@@ -178,7 +178,7 @@ const HeroSection = () => {
           </motion.a>
           <motion.a
             ref={bookBtnRef}
-            href="#ananta"
+            href="#books"
             whileHover={{
               scale: 1.02,
               borderColor: "var(--text-primary)",
@@ -201,7 +201,7 @@ const HeroSection = () => {
               cursor: 'pointer'
             }}
           >
-            Explore Ananta
+            Explore Books
           </motion.a>
         </motion.div>
       </motion.div>

@@ -7,7 +7,7 @@ import AnantaShowcase from '../../components/AnantaShowcase';
 import ContactFooter from '../../components/ContactFooter';
 import userData from '../../../userProfileData.json';
 
-export default function AnantaPage() {
+export default function BooksPage() {
   const profileData = userData?.userProfileData;
 
   useEffect(() => {

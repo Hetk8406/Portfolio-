@@ -15,10 +15,10 @@ const Navigation = () => {
 
   const navLinks = [
     { name: 'Home', href: '/#home' },
-    { name: 'Work', href: '/#work' },
-    { name: 'Ananta', href: '/#ananta' },
-    { name: 'Concepts', href: '/#concept' },
     { name: 'About', href: '/#about' },
+    { name: 'Work', href: '/#work' },
+    { name: 'Books', href: '/#books' },
+    { name: 'Concepts', href: '/#concept' },
     { name: 'Contact', href: '/#contact' }
   ];
 

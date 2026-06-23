@@ -4,7 +4,7 @@
       "name": "Het Kikani",
       "headline": "Pursuing B.E in CSE (Data Science) | Full Stack Web Developer | Aspiring Data Scientist | Exploring AI & ML",
       "location": "Ahmedabad, Gujarat, India",
-      "profilePicture": "https://ui-avatars.com/api/?name=Het+Kikani&background=020205&color=00f0ff&size=256",
+      "profilePicture": "/images/profile.png",
       "socialLinks": {
         "instagram": "https://www.instagram.com/hetkikani_804",
         "twitter": "https://x.com/KikaniHet",
@@ -37,22 +37,76 @@
       ],
       "certifications": [
         {
-          "name": "Machine Learning Specialization",
-          "issuer": "Stanford University / Coursera",
-          "date": "Nov 2024",
-          "link": "#"
+          "name": "Developing Interpersonal Skills",
+          "issuer": "Coursera",
+          "date": "2024",
+          "link": "/images/certificates/Coursera -Developing Interpersonal Skills.pdf",
+          "image": "Coursera -Developing Interpersonal Skills.pdf",
+          "description": "Training focused on effective communication, active listening, conflict resolution, and collaborative team dynamics."
         },
         {
-          "name": "Full Stack Open",
-          "issuer": "University of Helsinki",
-          "date": "Aug 2024",
-          "link": "#"
+          "name": "Introduction to Python",
+          "issuer": "Coursera",
+          "date": "2024",
+          "link": "/images/certificates/Coursera -Intoduction to Python.pdf",
+          "image": "Coursera -Intoduction to Python.pdf",
+          "description": "Core concepts of Python programming including variables, loops, control structures, and basic data structures."
         },
         {
-          "name": "Advanced React Patterns",
-          "issuer": "Frontend Masters",
-          "date": "May 2024",
-          "link": "#"
+          "name": "Programming with Scratch",
+          "issuer": "Coursera",
+          "date": "2024",
+          "link": "/images/certificates/Coursera -Programming with Scratch.pdf",
+          "image": "Coursera -Programming with Scratch.pdf",
+          "description": "Foundational programming logic, computational thinking, and block-based visual application development."
+        },
+        {
+          "name": "Python for Everyone",
+          "issuer": "Coursera / University of Michigan",
+          "date": "2024",
+          "link": "/images/certificates/Coursera -Pyton for Everyone.pdf",
+          "image": "Coursera -Pyton for Everyone.pdf",
+          "description": "Comprehensive studies in python covering data access, network programming, databases, and structured data structures."
+        },
+        {
+          "name": "Version Control",
+          "issuer": "Coursera",
+          "date": "2024",
+          "link": "/images/certificates/Coursera Version Control.pdf",
+          "image": "Coursera Version Control.pdf",
+          "description": "Mastery of Git, branching methodologies, repository workflows, and collaborative codebase version management."
+        },
+        {
+          "name": "Generative AI",
+          "issuer": "Coursera",
+          "date": "2024",
+          "link": "/images/certificates/Coursera_Certificate_Generative AI.pdf",
+          "image": "Coursera_Certificate_Generative AI.pdf",
+          "description": "Exploration of generative model architectures, prompt engineering, LLMs, and ethical implementation of AI technologies."
+        },
+        {
+          "name": "Google Certificate",
+          "issuer": "Google",
+          "date": "2024",
+          "link": "/images/certificates/Google Certificate.pdf",
+          "image": "Google Certificate.pdf",
+          "description": "Foundational professional skills certified by Google covering core computing concepts and modern digital productivity."
+        },
+        {
+          "name": "Python Fundamentals for Beginners",
+          "issuer": "Great Learning",
+          "date": "2024",
+          "link": "/images/certificates/Python fundamentals for beginner -Great learning.pdf",
+          "image": "Python fundamentals for beginner -Great learning.pdf",
+          "description": "Acquisition of basic programming logic, object-oriented concepts, and algorithmic thinking utilizing Python."
+        },
+        {
+          "name": "Generative AI",
+          "issuer": "Simplilearn",
+          "date": "2024",
+          "link": "/images/certificates/Simplilearn -GenAI.pdf",
+          "image": "Simplilearn -GenAI.pdf",
+          "description": "In-depth studies in neural networks, GANs, transformer models, and deployment of generative systems in cloud platforms."
         }
       ]
     },
@@ -62,24 +116,28 @@
         {
           "name": "QuantCore",
           "role": "Creator",
+          "category": "Data Science",
           "description": "Predicting Indian stock market prices using machine learning algortihms.",
           "url": "https://github.com/Hetk8406/Indian-Stock-Predictor"
         },
         {
           "name": "LegalPal",
           "role": "Core Contributor",
+          "category": "Web Apps",
           "description": "Organization housing the complete full-stack infrastructure for the LAWYER.AI legal assistance platform.",
           "url": "https://github.com/lawyerai-system"
         },
         {
           "name": "FoundIt!",
           "role": "Core Contributor",
+          "category": "Web Apps",
           "description": "Dedicated GitHub organization for the Lost & Found System architecture and repositories.",
           "url": "https://github.com/lostfound-system"
         },
         {
           "name": "ConceptLens",
           "role": "Core Contributor",
+          "category": "Web Apps",
           "description": "Organization for ConceptLens system repositories and exploration tools.",
           "url": "https://github.com/conceptlens-system"
         }
