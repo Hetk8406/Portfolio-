@@ -194,6 +194,20 @@
             "JavaScript": 3.3,
             "CSS": 3
           }
+        },
+        {
+          "name": "Cellphone Price Prediction",
+          "role": "Creator",
+          "category": "Data Science",
+          "description": "Predictive classification system modeling cellphone prices based on technical specifications and hardware parameters.",
+          "url": "https://github.com/Hetk8406/Cellphone-Price-Prediction--Data-Science-Project-2",
+          "languages": {
+            "Jupyter Notebook": 94,
+            "HTML": 1.9,
+            "Python": 1.7,
+            "JavaScript": 1.6,
+            "CSS": 0.8
+          }
         }
       ]
     }

@@ -97,6 +97,19 @@ const ProjectsGallery = ({ userData, limit }) => {
         "DS1-Portuguese.png"
       ],
       fullDescription: "A high-performance machine learning classifier designed to predict client subscriptions to long-term deposits for a Portuguese banking institution. The system leverages extensive socio-economic datasets, resolves class imbalance using SMOTE techniques, trains ensemble classifiers (Random Forests, XGBoost, and LightGBM), and delivers actionable campaign insights using SHAP explainability matrices."
+    },
+    {
+      // Index 6 → repositories[6] (currently "Cellphone Price Prediction")
+      image: "DS2-Cellphone.png",
+      fit: "cover",
+      position: "center",
+      impact: "Classifying cellphone price segments dynamically using hardware specifications.",
+      tags: ["Python", "Machine Learning", "Scikit-Learn", "Data Analysis"],
+      demoUrl: null,
+      screenshots: [
+        "DS2-Cellphone.png"
+      ],
+      fullDescription: "A comprehensive data science project that evaluates cellphone technical specifications (RAM, internal memory, processor speed, camera quality, battery capacity) to classify devices into accurate price ranges using classification algorithms."
     }
   ];
 
