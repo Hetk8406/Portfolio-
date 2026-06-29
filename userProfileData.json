@@ -208,6 +208,20 @@
             "JavaScript": 1.6,
             "CSS": 0.8
           }
+        },
+        {
+          "name": "FIFA 20 Football Player Analysis",
+          "role": "Creator",
+          "category": "Data Science",
+          "description": "Exploratory player clustering and analytics system evaluating athletic attributes and value estimations for FIFA Football datasets.",
+          "url": "https://github.com/Hetk8406/FIFA-20-Football-Player-Analysis--Data-Science-Project-3",
+          "languages": {
+            "Jupyter Notebook": 88.7,
+            "HTML": 5.4,
+            "JavaScript": 3.2,
+            "Python": 1.4,
+            "CSS": 1.3
+          }
         }
       ]
     }

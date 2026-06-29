@@ -118,6 +118,25 @@ const ProjectsGallery = ({ userData, limit }) => {
         "DS2-Cellphone.png"
       ],
       fullDescription: "A comprehensive data science project that evaluates cellphone technical specifications (RAM, internal memory, processor speed, camera quality, battery capacity) to classify devices into accurate price ranges using classification algorithms."
+    },
+    {
+      // Index 7 → repositories[7] (currently "FIFA 20 Football Player Analysis")
+      image: "DS3_project-1.png",
+      fit: "cover",
+      position: "center",
+      impact: "Clustering and analyzing player performances using K-Means and attribute dimensionalities.",
+      tags: ["Python", "Machine Learning", "K-Means Clustering", "Data Visualisation", "D3.js / Chart.js"],
+      demoUrl: null,
+      screenshots: [
+        "DS3_project-1.png",
+        "DS3_project-2.png",
+        "DS3_project-3.png",
+        "DS3_project-4.png",
+        "DS3_project-5.png",
+        "DS3_project-6.png",
+        "DS3_project-7.png"
+      ],
+      fullDescription: "An interactive exploratory data analysis and clustering engine built to evaluate player attributes, wage structures, and potential ratings across a database of football players. Features dimensionality reduction and unsupervised clustering visualizers to classify player traits."
     }
   ];
 
