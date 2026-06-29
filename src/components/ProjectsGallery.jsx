@@ -87,14 +87,22 @@ const ProjectsGallery = ({ userData, limit }) => {
     },
     {
       // Index 5 → repositories[5] (currently "Bank Marketing Predictor")
-      image: "DS1-Portuguese.png",
+      image: "DS _project 1-1.png",
       fit: "cover",
       position: "center",
       impact: "Classifying and predicting client subscription conversion rates for banking campaigns.",
       tags: ["Python", "Scikit-Learn", "XGBoost", "SMOTE", "Seaborn"],
       demoUrl: null,
       screenshots: [
-        "DS1-Portuguese.png"
+        "DS _project 1-1.png",
+        "DS _project 1-2.png",
+        "DS _project 1-3.png",
+        "DS _project 1-4.png",
+        "DS _project 1-5.png",
+        "DS _project 1-6.png",
+        "DS _project 1-7.png",
+        "DS _project 1-8.png",
+        "DS _project 1-9.png"
       ],
       fullDescription: "A high-performance machine learning classifier designed to predict client subscriptions to long-term deposits for a Portuguese banking institution. The system leverages extensive socio-economic datasets, resolves class imbalance using SMOTE techniques, trains ensemble classifiers (Random Forests, XGBoost, and LightGBM), and delivers actionable campaign insights using SHAP explainability matrices."
     },
