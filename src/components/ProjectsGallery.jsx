@@ -232,7 +232,6 @@ const ProjectsGallery = ({ userData, limit }) => {
           viewport={{ once: true, margin: "-10%" }}
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
             gap: '32px'
           }}
           className="projects-grid"
@@ -307,9 +306,17 @@ const ProjectsGallery = ({ userData, limit }) => {
       </AnimatePresence>
 
       <style>{`
+        .projects-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        @media (max-width: 1024px) {
+          .projects-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
         @media (max-width: 768px) {
           .projects-grid {
-            grid-template-columns: 1fr !important;
+            grid-template-columns: 1fr;
           }
         }
       `}</style>
