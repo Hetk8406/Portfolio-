@@ -151,6 +151,26 @@ const ProjectsGallery = ({ userData, limit }) => {
         "Bike Rental Demand Prediction/DS4-Project-2.png"
       ],
       fullDescription: "A predictive regression analysis system built to model daily bike rental sharing demands. Leverages historical weather trends, seasonal parameters, and user demographic data to build robust demand forecasting models."
+    },
+    {
+      // Index 9 → repositories[9] (currently "RiceLeaf Disease Detection")
+      image: "RiceLeaf Disease Detection/DS5-Project-1.png",
+      fit: "cover",
+      position: "center",
+      impact: "Automating detection of rice crop diseases using Deep Convolutional Networks.",
+      tags: ["Python", "Deep Learning", "TensorFlow / Keras", "Computer Vision", "Streamlit"],
+      demoUrl: null,
+      screenshots: [
+        "RiceLeaf Disease Detection/DS5-Project-1.png",
+        "RiceLeaf Disease Detection/DS5-Project-2.png",
+        "RiceLeaf Disease Detection/DS5-Project-3.png",
+        "RiceLeaf Disease Detection/DS5-Project-4.png",
+        "RiceLeaf Disease Detection/DS5-Project-5.png",
+        "RiceLeaf Disease Detection/DS5-Project-6.png",
+        "RiceLeaf Disease Detection/DS5-Project-7.png",
+        "RiceLeaf Disease Detection/DS5-Project-8.png"
+      ],
+      fullDescription: "A deep learning computer vision model trained to classify multiple types of rice leaf diseases (Bacterial leaf blight, Brown spot, and Leaf smut). Includes an interactive dashboard to upload leaf images and get instant diagnostic reports and treatment guidelines."
     }
   ];
 

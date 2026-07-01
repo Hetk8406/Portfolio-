@@ -235,6 +235,18 @@
             "JavaScript": 3.7,
             "CSS": 1.2
           }
+        },
+        {
+          "name": "RiceLeaf Disease Detection",
+          "role": "Creator",
+          "category": "Data Science",
+          "description": "Deep Learning image classification system identifying crop diseases in rice leaves to aid agricultural diagnostics.",
+          "url": "https://github.com/Hetk8406/Rice-Leaf-Disease-Detection--Data-Science-Project-5",
+          "languages": {
+            "Jupyter Notebook": 97.2,
+            "Python": 2.7,
+            "CSS": 0.1
+          }
         }
       ]
     }
